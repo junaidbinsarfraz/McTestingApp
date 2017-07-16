@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="McTestingApp.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="McTestingAppStoreContainer">
+    <EntitySet Name="Users" EntityType="McTestingApp.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tests1" EntityType="McTestingApp.Store.Tests1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Results" EntityType="McTestingApp.Store.Results" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Questions" EntityType="McTestingApp.Store.Questions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Choices" EntityType="McTestingApp.Store.Choices" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ResultUser" Association="McTestingApp.Store.ResultUser">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Result" EntitySet="Results" />
+    </AssociationSet>
+    <AssociationSet Name="TestResult" Association="McTestingApp.Store.TestResult">
+      <End Role="Test" EntitySet="Tests1" />
+      <End Role="Result" EntitySet="Results" />
+    </AssociationSet>
+    <AssociationSet Name="ChoiceQuestion" Association="McTestingApp.Store.ChoiceQuestion">
+      <End Role="Choice" EntitySet="Choices" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="RightChoice" Association="McTestingApp.Store.RightChoice">
+      <End Role="Choice" EntitySet="Choices" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="TestQuestion" Association="McTestingApp.Store.TestQuestion">
+      <End Role="Test" EntitySet="Tests1" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Role" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Designation" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Tests1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Designation" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Results">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MarksObtain" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TestId" Type="bigint" Nullable="false" />
+    <Property Name="User_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Questions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="QuestionNo" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TestId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Choices">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ChoiceNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Question_Id" Type="bigint" Nullable="false" />
+    <Property Name="RightChoiceQuestion_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="ResultUser">
+    <End Role="User" Type="McTestingApp.Store.Users" Multiplicity="1" />
+    <End Role="Result" Type="McTestingApp.Store.Results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Result">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TestResult">
+    <End Role="Test" Type="McTestingApp.Store.Tests1" Multiplicity="1" />
+    <End Role="Result" Type="McTestingApp.Store.Results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Result">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ChoiceQuestion">
+    <End Role="Choice" Type="McTestingApp.Store.Choices" Multiplicity="*" />
+    <End Role="Question" Type="McTestingApp.Store.Questions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Choice">
+        <PropertyRef Name="Question_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RightChoice">
+    <End Role="Choice" Type="McTestingApp.Store.Choices" Multiplicity="*" />
+    <End Role="Question" Type="McTestingApp.Store.Questions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Choice">
+        <PropertyRef Name="RightChoiceQuestion_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TestQuestion">
+    <End Role="Test" Type="McTestingApp.Store.Tests1" Multiplicity="1" />
+    <End Role="Question" Type="McTestingApp.Store.Questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

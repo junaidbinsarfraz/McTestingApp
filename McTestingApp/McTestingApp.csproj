@@ -127,6 +127,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\ApplicationContext.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Choice.cs">
       <DependentUpon>McTestingApp.tt</DependentUpon>
@@ -252,11 +253,13 @@
     <Content Include="less\icons\weather-icons\less\css\variables-time.css" />
     <Content Include="less\icons\weather-icons\less\css\variables-wind-names.css" />
     <Content Include="less\spinners.css" />
+    <Content Include="mctestingapp-mysql.sql" />
     <Content Include="McTestingApp.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>McTestingApp.Context.cs</LastGenOutput>
       <DependentUpon>McTestingApp.edmx</DependentUpon>
     </Content>
+    <Content Include="McTestingApp.edmx.sql" />
     <Content Include="McTestingApp.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>McTestingApp.cs</LastGenOutput>
@@ -971,15 +974,15 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Admin\ManageUsers\Create.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bootstrap\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Dashboard\" />
     <Folder Include="Views\Exam\" />
