@@ -26,5 +26,12 @@ namespace McTestingApp.Controllers
 
             return View();
         }
+        //New...   
+        [HttpPost, ActionName("Create")]
+        public ActionResult Create(User User)
+        {
+            User user = User.add(User);
+            return null;
+        }
     }
 }
