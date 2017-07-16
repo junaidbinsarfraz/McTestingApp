@@ -10,7 +10,7 @@
         <div class="col-sm-12 col-xs-12">
             @using (Html.BeginForm("Create", "Home", FormMethod.Post,
                              new { enctype = "multipart/form-data", data_toggle = "validator" }))
-            {
+            { 
                 <div class="form-group">
                     <label for="exampleInputEmail1" class="control-label">Full Name</label>
                     @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
