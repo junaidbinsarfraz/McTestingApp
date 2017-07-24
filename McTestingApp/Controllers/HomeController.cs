@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using McTestingApp.App_Start;
 
 namespace McTestingApp.Controllers
 {
@@ -10,33 +8,42 @@ namespace McTestingApp.Controllers
     {
         private McTestingAppContainer db = new McTestingAppContainer();
 
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Create()
         {
+            User user = (User)HttpContext.Session["LoggedInUser"];
+
+            if(!RoleHandler.isAdmin(user))
+            {
+                return View("Login", "Home");
+            }
+
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        //New...   
         [HttpPost, ActionName("Create")]
-        public ActionResult Create(User User)
+        public ActionResult Create(User user)
         {
-            McTestingAppContainer db = new McTestingAppContainer();
+            if (!RoleHandler.isAdmin((User)HttpContext.Session["LoggedInUser"]))
+            {
+                return View("Login", "Home");
+            }
 
-            List<User> users = db.Users.ToList();
+            if (ModelState.IsValid)
+            {
+                User dbUser = db.Users.FirstOrDefault(u => u.Username == user.Username);
 
+                if (dbUser != null)
+                {
+                    ModelState.AddModelError("Error", "Username already exists");
+                    return View();
+                }
 
+                db.Users.Add(user);
+                db.SaveChanges();
+
+                ModelState.AddModelError("Success", "User successfully added");
+            }
 
             return View();
         }
@@ -44,6 +51,14 @@ namespace McTestingApp.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+            User loginUser = (User)HttpContext.Session["LoggedInUser"];
+
+            if (RoleHandler.isLoggedIn(loginUser))
+            {
+                //return View("Login", "Home");
+                // Check the role then send user to specific page
+            }
+
             return View();
         }
 
@@ -51,6 +66,14 @@ namespace McTestingApp.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
+            User loginUser = (User)HttpContext.Session["LoggedInUser"];
+
+            if (RoleHandler.isLoggedIn(loginUser))
+            {
+                //return View("Login", "Home");
+                // Check the role then send user to specific page
+            }
+
             if (ModelState.IsValid)
             {
                 User dbUser = db.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
