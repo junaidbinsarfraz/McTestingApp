@@ -3863,7 +3863,7 @@ table.focus-on tbody tr.focused td {
   background: url(../../plugins/images/login-register.jpg) no-repeat left center / cover !important;
   height: 100%;
   position: fixed;
-  background-size: 80% !important;
+  /*background-size: 80% !important;*/
 }
 .login-box {
   background: #ffffff;
