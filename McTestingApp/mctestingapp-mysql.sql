@@ -37,13 +37,15 @@ CREATE TABLE Users (
 CREATE TABLE Tests1 (
     Id bigint auto_increment primary key NOT NULL,
     Name varchar(500)  NULL,
-    Designation varchar(500)  NULL
+    Designation varchar(500)  NULL,
+    Published bit(1) default false
 );
 
 -- Creating table 'Results'
 CREATE TABLE Results (
     Id bigint auto_increment primary key NOT NULL,
     MarksObtain varchar(500)  NULL,
+    Taken bit(1) default false,
     TestId bigint  NOT NULL,
     User_Id bigint  NOT NULL
 );
@@ -62,4 +64,12 @@ CREATE TABLE Choices (
     ChoiceNumber varchar(500)  NULL,
     Question_Id bigint  NOT NULL,
     RightChoiceQuestion_Id bigint  NOT NULL
+);
+
+-- Creating table 'Files'
+CREATE TABLE Files (
+    Id bigint auto_increment primary key NOT NULL,
+    Name varchar(500)  NULL,
+    Type varchar(500)  NULL,
+    Path varchar(500)  NULL
 );

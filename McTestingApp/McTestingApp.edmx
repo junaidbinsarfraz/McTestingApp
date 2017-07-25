@@ -50,6 +50,7 @@
     </Key>
     <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+	<Property Name="Published" Type="bit" Nullable="true" />
     <Property Name="Designation" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Results">
@@ -169,6 +170,7 @@
             <End Role="Test" EntitySet="Tests1" />
             <End Role="Question" EntitySet="Questions" />
           </AssociationSet>
+          <EntitySet Name="Files" EntityType="McTestingApp.File" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -189,6 +191,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="Published" Type="Boolean" Nullable="true" DefaultValue="false" />
           <Property Name="Designation" Type="String" Nullable="true" />
           <NavigationProperty Name="Results" Relationship="McTestingApp.TestResult" FromRole="Test" ToRole="Result" />
           <NavigationProperty Name="Questions" Relationship="McTestingApp.TestQuestion" FromRole="Test" ToRole="Question" />
@@ -260,6 +263,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="true" />
+          <Property Name="Type" Type="String" Nullable="true" />
+          <Property Name="Path" Type="String" Nullable="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

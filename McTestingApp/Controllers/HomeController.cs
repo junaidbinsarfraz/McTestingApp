@@ -13,7 +13,7 @@ namespace McTestingApp.Controllers
         {
             User user = (User)HttpContext.Session["LoggedInUser"];
 
-            if(!RoleHandler.isAdmin(user))
+            if (!RoleHandler.isAdmin(user))
             {
                 return View("Login", "Home");
             }
@@ -40,6 +40,23 @@ namespace McTestingApp.Controllers
                 }
 
                 db.Users.Add(user);
+
+                // Level 1
+                if (Designation.Training_Exective.ToString() == user.Designation || Designation.Assistant_Manager_Training.ToString() == user.Designation 
+                    || Designation.Manager_Training.ToString() == user.Designation || Designation.Divisional_Manager_Training.ToString() == user.Designation)
+                {
+                    user.Role = Role.Level1.ToString();
+                }
+                else if (Designation.National_Manager_Training.ToString() == user.Designation || Designation.Assistant_Director_HR_Training.ToString() == user.Designation
+                    || Designation.Resturant_Manager.ToString() == user.Designation || Designation.Operation_Consultant.ToString() == user.Designation)
+                {
+                    user.Role = Role.Level2.ToString();
+                }
+                else
+                {
+                    user.Role = Role.Level3.ToString();
+                }
+
                 db.SaveChanges();
 
                 ModelState.AddModelError("Success", "User successfully added");
@@ -81,6 +98,8 @@ namespace McTestingApp.Controllers
                 if (dbUser != null)
                 {
                     // Save role to session then redirect to role specific dashboard
+
+                    HttpContext.Session["LoggedInUser"] = dbUser;
 
                     return View();
                 }

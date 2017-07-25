@@ -45,6 +45,7 @@
     </Key>
     <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Published" Type="bit" Nullable="true" />
     <Property Name="Designation" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Results">

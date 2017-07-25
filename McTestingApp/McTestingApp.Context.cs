@@ -12,8 +12,7 @@ namespace McTestingApp
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
-    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
+    
     public partial class McTestingAppContainer : DbContext
     {
         public McTestingAppContainer()
@@ -31,5 +30,6 @@ namespace McTestingApp
         public virtual DbSet<Result> Results { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Choice> Choices { get; set; }
+        public virtual DbSet<File> Files { get; set; }
     }
 }

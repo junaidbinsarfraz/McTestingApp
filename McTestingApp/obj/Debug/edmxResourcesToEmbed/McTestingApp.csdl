@@ -26,6 +26,11 @@
       <End Role="Test" EntitySet="Tests1" />
       <End Role="Question" EntitySet="Questions" />
     </AssociationSet>
+    <EntitySet Name="Files" EntityType="McTestingApp.File" />
+    <AssociationSet Name="UserFile" Association="McTestingApp.UserFile">
+      <End Role="User" EntitySet="Users" />
+      <End Role="File" EntitySet="Files" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="User">
     <Key>
@@ -39,6 +44,7 @@
     <Property Name="Email" Type="String" Nullable="true" />
     <Property Name="Designation" Type="String" Nullable="true" />
     <NavigationProperty Name="Results" Relationship="McTestingApp.ResultUser" FromRole="User" ToRole="Result" />
+    <NavigationProperty Name="File" Relationship="McTestingApp.UserFile" FromRole="User" ToRole="File" />
   </EntityType>
   <EntityType Name="Test">
     <Key>
@@ -46,6 +52,7 @@
     </Key>
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="true" />
+    <Property Name="Published" Type="Boolean" Nullable="true" DefaultValue="false" />
     <Property Name="Designation" Type="String" Nullable="true" />
     <NavigationProperty Name="Results" Relationship="McTestingApp.TestResult" FromRole="Test" ToRole="Result" />
     <NavigationProperty Name="Questions" Relationship="McTestingApp.TestQuestion" FromRole="Test" ToRole="Question" />
@@ -116,5 +123,19 @@
         <PropertyRef Name="TestId" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <EntityType Name="File">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="true" />
+    <Property Name="Type" Type="String" Nullable="true" />
+    <Property Name="Path" Type="String" Nullable="true" />
+    <NavigationProperty Name="User" Relationship="McTestingApp.UserFile" FromRole="File" ToRole="User" />
+  </EntityType>
+  <Association Name="UserFile">
+    <End Type="McTestingApp.User" Role="User" Multiplicity="0..1" />
+    <End Type="McTestingApp.File" Role="File" Multiplicity="0..1" />
   </Association>
 </Schema>
