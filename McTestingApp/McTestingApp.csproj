@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\ApplicationContext.cs" />
+    <Compile Include="App_Start\RoleHandler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Choice.cs">
       <DependentUpon>McTestingApp.tt</DependentUpon>
