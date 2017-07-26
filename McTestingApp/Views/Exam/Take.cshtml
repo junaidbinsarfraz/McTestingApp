@@ -1,0 +1,35 @@
+﻿@model McTestingApp.Test
+
+@{
+    ViewBag.Title = "Take";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="white-box">
+    <div class="row">
+        <div class="col-sm-12 col-xs-12">
+            <h2>Test @Model.Name</h2>
+            @using (Html.BeginForm("Take", "Exam", FormMethod.Post,
+                             new { enctype = "multipart/form-data", data_toggle = "validator" }))
+            {
+                @Html.HiddenFor(a => a.Id)
+                @{
+                int index = 0;
+                }
+                @foreach (var question in Model.Questions)
+                {
+                    index++;
+                    <p>@index) @question.Description</p>
+                    <br />
+                    //A piece of code & html here
+                    @foreach (var choice in question.Choices)
+                    {
+                        @Html.RadioButtonFor(model => question.Choice, choice.ChoiceNumber, new { @class = "form-control", @required = "required", @name = choice.Question.Id.ToString() })
+                    }
+                }
+
+                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Finish</button>
+            }
+        </div>
+    </div>
+</div>

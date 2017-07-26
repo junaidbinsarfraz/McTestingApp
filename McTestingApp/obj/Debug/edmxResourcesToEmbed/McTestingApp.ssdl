@@ -6,6 +6,7 @@
     <EntitySet Name="Results" EntityType="McTestingApp.Store.Results" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Questions" EntityType="McTestingApp.Store.Questions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Choices" EntityType="McTestingApp.Store.Choices" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Files" EntityType="McTestingApp.Store.Files" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="ResultUser" Association="McTestingApp.Store.ResultUser">
       <End Role="User" EntitySet="Users" />
       <End Role="Result" EntitySet="Results" />
@@ -46,6 +47,7 @@
     <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Designation" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Published" Type="bit" Nullable="true" DefaultValue="false" />
   </EntityType>
   <EntityType Name="Results">
     <Key>
@@ -73,6 +75,15 @@
     <Property Name="ChoiceNumber" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Question_Id" Type="bigint" Nullable="false" />
     <Property Name="RightChoiceQuestion_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Files">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Type" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Path" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <Association Name="ResultUser">
     <End Role="User" Type="McTestingApp.Store.Users" Multiplicity="1" />

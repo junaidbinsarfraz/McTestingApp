@@ -1,0 +1,55 @@
+﻿@model IEnumerable<McTestingApp.File>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h4 class="page-title">Materials</h4>
+<div class="row">
+    <div class="col-md-4 col-xs-12">
+        <div class="white-box">
+            @*<div class="user-bg"> <img alt="user" src="~/plugins/images/big/img3.jpg" width="100%"> </div>*@
+            <div class="user-btm-box">
+
+                @if (((McTestingApp.User)HttpContext.Current.Session["User"]).Role.ToString() == McTestingApp.App_Start.Role.Level1.ToString())
+                {
+                    using (Html.BeginForm("Upload", "File", FormMethod.Post,
+                             new { enctype = "multipart/form-data", data_toggle = "validator" }))
+                    {
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="control-label">Select File</label>
+                            @Html.TextBox("file", new { type = "file", htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor("file", "", new { @class = "text-danger" })*@
+                        </div>
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Upload</button>
+                    }
+                }
+
+                @foreach (var item in Model)
+                {
+                    <div class="row text-center m-t-10">
+                        <div class="col-md-6 b-r">
+                            <strong>Name</strong>
+                            <p>@item.Name</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Download</strong>
+                            @Html.ActionLink("Download", "Download", "File", new { id = @item.Id }, new { @class = "btn btn-success btn-block", @target = "_blank" })
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <hr>
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*<div style="margin-bottom: 15px;">
+        @Html.ActionLink("Edit", "Edit", "Doctor", new { id = Model.Id }, new { @class = "btn btn-success btn-block" })
+    </div>*@

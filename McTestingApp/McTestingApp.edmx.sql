@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/16/2017 13:08:47
--- Generated from EDMX file: E:\Github\McTestingApp\McTestingApp\McTestingApp.edmx
+-- Date Created: 07/26/2017 09:12:43
+-- Generated from EDMX file: D:\Junaid\Githubnew\McTestingApp\McTestingApp\McTestingApp.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [mctestingapp];
+USE [McTestingApp];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,11 +17,41 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_ResultUser]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Results] DROP CONSTRAINT [FK_ResultUser];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TestResult]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Results] DROP CONSTRAINT [FK_TestResult];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ChoiceQuestion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Choices] DROP CONSTRAINT [FK_ChoiceQuestion];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RightChoice]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Choices] DROP CONSTRAINT [FK_RightChoice];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TestQuestion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Questions] DROP CONSTRAINT [FK_TestQuestion];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[Tests1]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tests1];
+GO
+IF OBJECT_ID(N'[dbo].[Results]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Results];
+GO
+IF OBJECT_ID(N'[dbo].[Questions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Questions];
+GO
+IF OBJECT_ID(N'[dbo].[Choices]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Choices];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -43,7 +73,8 @@ GO
 CREATE TABLE [dbo].[Tests1] (
     [Id] bigint IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NULL,
-    [Designation] nvarchar(max)  NULL
+    [Designation] nvarchar(max)  NULL,
+    [Published] bit  NULL
 );
 GO
 
@@ -71,6 +102,15 @@ CREATE TABLE [dbo].[Choices] (
     [ChoiceNumber] nvarchar(max)  NULL,
     [Question_Id] bigint  NOT NULL,
     [RightChoiceQuestion_Id] bigint  NOT NULL
+);
+GO
+
+-- Creating table 'Files'
+CREATE TABLE [dbo].[Files] (
+    [Id] bigint IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NULL,
+    [Type] nvarchar(max)  NULL,
+    [Path] nvarchar(max)  NULL
 );
 GO
 
@@ -105,6 +145,12 @@ GO
 -- Creating primary key on [Id] in table 'Choices'
 ALTER TABLE [dbo].[Choices]
 ADD CONSTRAINT [PK_Choices]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Files'
+ALTER TABLE [dbo].[Files]
+ADD CONSTRAINT [PK_Files]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 

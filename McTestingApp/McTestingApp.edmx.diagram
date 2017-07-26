@@ -5,16 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8080dad3ac234231a4b1a78dc9b8c331" Name="Diagram1" >
-        <EntityTypeShape EntityType="McTestingApp.User" Width="1.5" PointX="2.625" PointY="2.625" />
+        <EntityTypeShape EntityType="McTestingApp.User" Width="1.5" PointX="0.5" PointY="3.125" />
         <EntityTypeShape EntityType="McTestingApp.Test" Width="1.25" PointX="3.75" PointY="0.5" />
         <EntityTypeShape EntityType="McTestingApp.Result" Width="1.5" PointX="0.5" PointY="0.5" />
-        <EntityTypeShape EntityType="McTestingApp.Question" Width="1.25" PointX="8.25" PointY="1.375" />
-        <EntityTypeShape EntityType="McTestingApp.Choice" Width="1.375" PointX="5.375" PointY="2.125" />
+        <EntityTypeShape EntityType="McTestingApp.Question" Width="1.25" PointX="6.75" PointY="0.5" />
+        <EntityTypeShape EntityType="McTestingApp.Choice" Width="1.375" PointX="6.75" PointY="3.75" />
         <AssociationConnector Association="McTestingApp.ResultUser" />
         <AssociationConnector Association="McTestingApp.TestResult" />
         <AssociationConnector Association="McTestingApp.ChoiceQuestion" />
         <AssociationConnector Association="McTestingApp.RightChoice" />
         <AssociationConnector Association="McTestingApp.TestQuestion" />
+        <EntityTypeShape EntityType="McTestingApp.File" Width="1.5" PointX="3.5" PointY="3.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

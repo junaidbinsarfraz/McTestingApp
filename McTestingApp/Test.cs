@@ -17,6 +17,7 @@ namespace McTestingApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Test()
         {
+            this.Published = false;
             this.Results = new HashSet<Result>();
             this.Questions = new HashSet<Question>();
         }
@@ -24,6 +25,7 @@ namespace McTestingApp
         public long Id { get; set; }
         public string Name { get; set; }
         public string Designation { get; set; }
+        public Nullable<bool> Published { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Result> Results { get; set; }
